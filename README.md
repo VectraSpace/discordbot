@@ -1,5 +1,13 @@
 # Vectra Space - Discord Bot
 
+
+
+NOTE (Please Read): This bot should never be used in production, it has a high likelyhood of breaking and isn't coded the best. If you want a ticket or administration bot for a production environment please go check out Tickety at https://tickety.xyz/ or Dyno at https://www.dynobot.net/ . This bot was simply made publicly avaliable due to the lack of self hosted ticket bots, this dosen't mean it should ever be used.
+
+
+
+
+
 This bot belongs to a company called "Vectra Space", all code is open source and can be used freely as long as licencing conditions are met. Feel free to use this projects source code for your own projects but do not claim it as you own. No warenty or support is provided with the use of this code and Vectra Space or it's developers are not responsible for any damage caused by the bot. Aditionally this version is not perfect and contains many bugs, these eventually will be fixed.
 
 Instructions: 
