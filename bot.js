@@ -83,7 +83,8 @@ client.on("message", (message) => {
     }
 });
 
-// Administration commands
+// Administration commands (Disabled untill permission checking is added)
+/*
 client.on("message", (message) => {
     if (isCommand(message, "kick")) {
         // Easy way to get member object though mentions.
@@ -105,6 +106,7 @@ client.on("message", (message) => {
         });
     }
 });
+*/
 
 // Support Tickets
 function clean(text) {
