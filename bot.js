@@ -76,8 +76,8 @@ client.on("message", (message) => {
 // Help Command
 client.on("message", (message) => {
     // Exit and stop if the prefix is not there or if user is a bot
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    if (message.content.startsWith(prefix + "help")) {
+    if (!isCommand(message) || message.author.bot) return;
+    if (isCommand(message, "help")) {
         message.author.send("**Vectra Space Commands** \n \n**/new** - `Creates a channel for support.` \n **/close** - `Closes any currently open tickets!` \n **/ping** - `Get your current ping to the bot and the Discord API.`");
         message.reply("Check your DMs.")
     }
@@ -85,9 +85,16 @@ client.on("message", (message) => {
 
 // Administration commands
 client.on("message", (message) => {
-    if (message.content.startsWith(prefix + "kick")) {
+    if (isCommand(message, "kick")) {
         // Easy way to get member object though mentions.
         var member = message.mentions.members.first();
+
+        // Check if a member was actually tagged
+        if (!member) {
+            message.channel.send("Please tag a user!");
+            return;
+        }
+
         // Kick
         member.kick().then((member) => {
             // Successmessage
@@ -115,15 +122,15 @@ client.on("guildCreate", (guild) => {
 });
 
 client.on("message", (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!isCommand(message) || message.author.bot) return;
     // Ping Command
-    if (message.content.toLowerCase().startsWith(prefix + `ping`)) {
+    if (isCommand(message, "ping")) {
         message.channel.send(`Fetching!`).then(m => {
             m.edit(`**Bot** - ` + (m.createdTimestamp - message.createdTimestamp) + `ms.` + ` \n**Discord API** - ` + Math.round(client.ping) + `ms.`);
         });
     }
     // New ticket command
-    if (message.content.toLowerCase().startsWith(prefix + `new`)) {
+    if (isCommand(message, "new")) {
         const reason = message.content.split(" ").slice(1).join(" ");
         if (!message.guild.roles.exists("name", "Support Staff")) return message.channel.send(`This server doesn't have a \`Support Staff\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
         if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
@@ -154,7 +161,7 @@ client.on("message", (message) => {
     }
 
     // Close ticket command
-    if (message.content.toLowerCase().startsWith(prefix + `close`)) {
+    if (isCommand(message, "close")) {
         if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`/confirm\`. This will time out in 10 seconds and be cancelled.`)
@@ -177,6 +184,13 @@ client.on("message", (message) => {
 
 });
 
+function isCommand(message) {
+    return message.content.toLowerCase().startsWith(prefix);
+}
+
+function isCommand(message, cmd) {
+    return message.content.toLowerCase().startsWith(prefix + cmd);
+}
 
 // Bot token 
 client.login("PUT DISCORD TOKEN HERE");
