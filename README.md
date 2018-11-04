@@ -9,7 +9,7 @@
 
 
 This bot belongs to a company called "Vectra Space", all code is open source and can be used freely as long as licencing conditions are met. Feel free to use this projects source code for your own projects but do not claim it as you own. 
-No warranty or support is provided with the use of this code and Vectra Space or it's developers are not responsible for any damage caused by the bot. Aditionally this version is not perfect and contains many bugs, these eventually will be fixed.
+No warranty or support is provided with the use of this code and Vectra Space or it's developers are not responsible for any damage caused by the bot. Aditionally, this version is not perfect and contains many bugs, these eventually will be fixed.
 
 ***
 
